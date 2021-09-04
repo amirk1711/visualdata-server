@@ -5,6 +5,18 @@ const app = express();
 const port = process.env.PORT || 8000;
 const db = require("./config/mongoose");
 
+const cors = require("cors");
+
+//enables cors
+app.options("*", cors());
+app.use(
+	cors({
+		origin: "*",
+		methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+		preflightContinue: false,
+	})
+);
+
 app.use(express.json());
 
 app.use("/", require("./routes"));
